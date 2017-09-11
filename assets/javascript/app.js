@@ -22,7 +22,7 @@ $.ajax({
   url: queryURL,
   method: 'GET'
 }).done(function(response) {
-  console.log(response.data[0].images.original_still.url);
+  console.log(response);
   $("#pic").attr("src", response.data[0].images.original_still.url);
 });
 
