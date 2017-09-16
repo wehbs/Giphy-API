@@ -1,65 +1,75 @@
 $(document).ready(function() {
 
 
+  var foods = ["pizza", "hotdog", "eggplant", "salad", "potatoes"];
 
 
-
-var foods = ["pizza", "hotdog", "eggplant", "salad", "potatoes"];
-
+  renderButtons()
 
 
+  // Add new button
+  $("#addFood").on("click", function(event) {
+    event.preventDefault();
+
+    var food = $("#foodInput").val().trim();
+
+    foods.push(food);
+
+    renderButtons();
+  });
 
 
+// Search the Giphy Api based on the value of the button clicked
+  function searchGiphyAPI() {
 
+    $("#foods").empty();
+    var foodSearch = $(this).attr("data-name");
 
-console.log(foods);
+    // QueryURL for Giphy API
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=dc6zaTOxFJmzC";
 
+    $.ajax({
+      url: queryURL,
+      method: 'GET'
+    }).done(function(response) {
+      console.log(response);
 
-// Example queryURL for Giphy API
-var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
+      var results = response.data;
 
-$.ajax({
-  url: queryURL,
-  method: 'GET'
-}).done(function(response) {
-  console.log(response);
-  $("#pic").attr("src", response.data[0].images.original_still.url);
-});
+      for (var i = 0; i < results.length; i++) {
 
-function renderButtons() {
+        var foodDiv = $("<div>");
+        var p = $("<p>").text("Rating: " + results[i].rating);
 
-  // Deleting the movies prior to adding new movies
-  // (this is necessary otherwise you will have repeat buttons)
-  $("#foodButtons").empty();
+        var foodImage = $("<img>");
+        foodImage.attr("src", results[i].images.fixed_height_still.url);
 
-  for (var i = 0; i < foods.length; i++) {
+        foodDiv.append(p);
+        foodDiv.append(foodImage);
 
-    var a = $("<button>");
-    a.addClass("food");
-    a.attr("data-name", foods[i]);
-    a.text(foods[i]);
-    $("#foodButtons").append(a);
+        $("#foods").prepend(foodDiv);
+      }
+
+    });
   }
-}
-
-// This function handles events where a movie button is clicked
-$("#addFood").on("click", function(event) {
-  event.preventDefault();
-  // This line grabs the input from the textbox
-  var food = $("#foodInput").val().trim();
-
-  // Adding movie from the textbox to our array
-  foods.push(food);
-
-  // Calling renderButtons which handles the processing of our movie array
-  renderButtons();
-});
 
 
-renderButtons()
+  // Create buttons
+  function renderButtons() {
 
+    $("#foodButtons").empty();
 
+    for (var i = 0; i < foods.length; i++) {
 
+      var createButton = $("<button>");
+      createButton.addClass("btn btn-primary");
+      createButton.attr("data-name", foods[i]);
+      createButton.text(foods[i]);
+      $("#foodButtons").append(createButton);
+    }
+  }
+
+  $(document).on("click", ".btn-primary", searchGiphyAPI);
 
 
 });
