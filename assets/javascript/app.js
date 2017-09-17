@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 
   var foods = ["pizza", "hotdog", "eggplant", "salad", "potatoes"];
@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 
   // Add new button
-  $("#addFood").on("click", function(event) {
+  $("#addFood").on("click", function (event) {
     event.preventDefault();
 
     var food = $("#foodInput").val().trim();
@@ -19,7 +19,7 @@ $(document).ready(function() {
   });
 
 
-// Search the Giphy Api based on the value of the button clicked
+  // Search the Giphy Api based on the value of the button clicked
   function searchGiphyAPI() {
 
     $("#foods").empty();
@@ -31,7 +31,7 @@ $(document).ready(function() {
     $.ajax({
       url: queryURL,
       method: 'GET'
-    }).done(function(response) {
+    }).done(function (response) {
       console.log(response);
 
       var results = response.data;
