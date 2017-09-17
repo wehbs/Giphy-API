@@ -32,17 +32,22 @@ $(document).ready(function () {
       url: queryURL,
       method: 'GET'
     }).done(function (response) {
-      console.log(response);
+      // console.log(response);
 
       var results = response.data;
 
-      for (var i = 0; i < results.length; i++) {
+      for (var i = 0; i < 10; i++) {
 
         var foodDiv = $("<div>");
         var p = $("<p>").text("Rating: " + results[i].rating);
 
         var foodImage = $("<img>");
         foodImage.attr("src", results[i].images.fixed_height_still.url);
+        foodImage.attr("data-still", results[i].images.fixed_height_still.url);
+        foodImage.attr("data-animate", results[i].images.fixed_height.url);
+        foodImage.attr("data-state", "still");        
+        foodImage.attr("class", "gif");        
+        
 
         foodDiv.append(p);
         foodDiv.append(foodImage);
@@ -52,7 +57,6 @@ $(document).ready(function () {
 
     });
   }
-
 
   // Create buttons
   function renderButtons() {
@@ -69,7 +73,25 @@ $(document).ready(function () {
     }
   }
 
+
+ function gifAnimate() {
+
+    var state = $(this).attr("data-state");
+
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  };
+
+
+
   $(document).on("click", ".btn-primary", searchGiphyAPI);
+  $(document).on("click", "img", gifAnimate);
+  
 
 
 });
