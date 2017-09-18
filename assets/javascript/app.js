@@ -72,7 +72,7 @@ $(document).ready(function () {
     }
   }
 
-
+// Turn motion on and off when image is clicked
   function gifAnimate() {
 
     var state = $(this).attr("data-state");
