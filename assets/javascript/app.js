@@ -32,7 +32,6 @@ $(document).ready(function () {
       url: queryURL,
       method: 'GET'
     }).done(function (response) {
-      console.log(response);
 
       var results = response.data;
 
