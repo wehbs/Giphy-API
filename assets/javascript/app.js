@@ -3,9 +3,7 @@ $(document).ready(function () {
 
   var foods = ["pizza", "hotdog", "eggplant", "salad", "potatoes"];
 
-
   renderButtons()
-
 
   // Add new button
   $("#addFood").on("click", function (event) {
@@ -17,7 +15,6 @@ $(document).ready(function () {
 
     renderButtons();
   });
-
 
   // Search the Giphy Api based on the value of the button clicked
   function searchGiphyAPI() {
@@ -32,21 +29,19 @@ $(document).ready(function () {
       url: queryURL,
       method: 'GET'
     }).done(function (response) {
-
       var results = response.data;
 
       for (var i = 0; i < 10; i++) {
-
-        var foodDiv = $("<div class=col-md-4>");
+        // Create 10 Divs to hold gifs
+        var foodDiv = $("<div class=col-md-4>" + "<br>");
         var p = $("<p>").text("Rating: " + results[i].rating);
-
+        // Create img tags and add some attributes
         var foodImage = $("<img>");
         foodImage.attr("src", results[i].images.fixed_width_still.url);
         foodImage.attr("data-still", results[i].images.fixed_width_still.url);
         foodImage.attr("data-animate", results[i].images.fixed_width.url);
         foodImage.attr("data-state", "still");
         foodImage.attr("class", "gif");
-
 
         foodDiv.append(p);
         foodDiv.append(foodImage);
@@ -86,11 +81,8 @@ $(document).ready(function () {
     }
   };
 
-
-
   $(document).on("click", ".btn-primary", searchGiphyAPI);
   $(document).on("click", "img", gifAnimate);
-
 
 
 });

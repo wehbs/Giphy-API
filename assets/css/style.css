@@ -1,9 +1,14 @@
 body {
-  background-color: #B3AFAF;
+  background-color: #E9E3E3;
 }
 
 form {
   float: right;
+}
+
+img {
+  height: 150px;
+  max-width: 240px;
 }
 
 .btn-primary {
