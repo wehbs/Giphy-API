@@ -14,6 +14,9 @@ $(document).ready(function () {
     foods.push(food);
 
     renderButtons();
+
+    $("#foodInput").val("")
+    
   });
 
   // Search the Giphy Api based on the value of the button clicked
