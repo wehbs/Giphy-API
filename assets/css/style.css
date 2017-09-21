@@ -7,14 +7,14 @@ form {
   margin: 3px;
 }
 
-input {
-  font-size: 16px;
-}
-
 @media only screen and (max-width: 767px) {
   form {
     float: left;
   }
+}
+
+#foodInput {
+  font-size: 16px;
 }
 
 img {
