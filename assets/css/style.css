@@ -4,6 +4,13 @@ body {
 
 form {
   float: right;
+  margin: 3px;
+}
+
+@media only screen and (max-width: 767px) {
+  form {
+    float: left;
+  }
 }
 
 img {
