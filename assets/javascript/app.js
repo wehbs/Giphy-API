@@ -24,9 +24,11 @@ $(document).ready(function () {
   function searchGiphyAPI() {
     // Clears out the results from the previous search before populating new results
     $("#foods").empty();
+    $("#heading").empty();
+    // Add a heading with instructions
+    $("#heading").append("<h1>Click on a PIC to make it GIF!</h1>");
     // Captures the value of the data-name attribute from the button that was pressed
     var foodSearch = $(this).attr("data-name");
-
     // QueryURL for Giphy API
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=dc6zaTOxFJmzC";
     // Ajax call to pull in the objects from the Giphy API
